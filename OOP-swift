@@ -1,0 +1,72 @@
+class Expert{
+    var name : String
+    var bio : String
+    var likes : Int
+    
+    init(name: String, bio: String, likes: Int) {
+        self.name = name
+        self.bio = bio
+        self.likes = likes
+    }
+    
+    func addNewLike() {
+        likes += 1
+    }
+    
+    func getName() -> String {
+        return "Expert name \(name)"
+    }
+}
+
+var expert1 = Expert(name: "Ruba", bio: "Web Developer", likes: 0)
+var expert2 = Expert(name: "Mutaz", bio: "IOS Developer", likes: 2)
+
+expert1.name
+expert2.name
+expert1.likes
+expert1.addNewLike()
+expert1.likes
+
+class Developer : Expert {
+    var arrOfProgramingLanguaes : [String]
+    init(name: String, bio: String, likes: Int,arrOfProgramingLanguaes : [String] ) {
+        self.arrOfProgramingLanguaes = arrOfProgramingLanguaes
+        super.init(name: name, bio: bio, likes: likes)
+    }
+    override func getName() -> String {
+        return "Developer Name : \(name)"
+    }
+    
+}//end developer class
+
+class Lawyer : Expert {
+    var numberOfClosingCases : Int
+    init(name: String, bio: String, likes: Int,numberOfClosingCases : Int){
+        self.numberOfClosingCases = numberOfClosingCases
+        super.init(name: name, bio: bio, likes: likes)
+    }
+    override func getName() -> String {
+        return "Lawyer Name : \(name)"
+    }
+    
+}//end Lawer class
+
+var developer1 = Developer(name: "Ruba", bio: "Web Developer", likes: 20, arrOfProgramingLanguaes: ["Java","Swift"])
+var lawyer1 = Lawyer(name: "Ahmed", bio: "", likes: 5, numberOfClosingCases: 20)
+
+developer1.arrOfProgramingLanguaes
+
+//Polymorphism >> override
+//print (developer1.getName())
+//print(lawyer1.getName())
+
+var arrExperts : [Expert] = [developer1, lawyer1]
+
+for experts in arrExperts {
+    print (experts.getName())
+    if let developer = experts as? Developer{
+        print(developer.arrOfProgramingLanguaes)
+    }else if let lawyer = experts as? Lawyer{
+        print (lawyer.numberOfClosingCases)
+    }
+}
